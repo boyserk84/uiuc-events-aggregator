@@ -1,0 +1,7 @@
+2009-10-08 19:58:08 Notice: Notice (1024): Please change the value of 'Security.salt' in app/config/core.php to a salt value specific to your application in [/opt/lampp/htdocs/caketest/cake/libs/debugger.php, line 682]
+2009-10-08 21:17:08 Notice: Notice (1024): Please change the value of 'Security.salt' in app/config/core.php to a salt value specific to your application in [/opt/lampp/htdocs/caketest/cake/libs/debugger.php, line 682]
+2009-10-08 21:22:12 Notice: Notice (1024): Please change the value of 'Security.salt' in app/config/core.php to a salt value specific to your application in [/opt/lampp/htdocs/caketest/cake/libs/debugger.php, line 682]
+2009-10-08 21:23:04 Notice: Notice (8): Undefined variable: post in [/opt/lampp/htdocs/caketest/app/views/events/details.ctp, line 3]
+2009-10-08 21:23:18 Notice: Notice (8): Undefined variable: event in [/opt/lampp/htdocs/caketest/app/views/events/details.ctp, line 3]
+2009-10-08 21:29:39 Notice: Notice (8): Undefined variable: events in [/opt/lampp/htdocs/caketest/app/views/events/details.ctp, line 5]
+2009-10-08 21:31:46 Notice: Notice (8): Undefined index: text in [/opt/lampp/htdocs/caketest/app/views/events/details.ctp, line 6]
