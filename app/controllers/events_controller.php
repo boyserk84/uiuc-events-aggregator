@@ -13,14 +13,9 @@ class EventsController extends AppController {
 	/**
 	 * Details: A function to display the details of an event.
 	 */
-	function details() {
-		// Set some static data for the Events view to use when displaying this page.
-		$this->set('text', 'stuff goes here.');
-
-		// We automatically have the Event variable set to the Event model,
-		// so now we just call the find() method (which the model inherited
-		// from AppModel) to get a listing of events.
-		$this->set('events', $this->Event->find('all'));
+	function details($event_id) {
+		//$this->Event->event_id = $event_id;
+		$this->set('event', $this->Event->findByEventId($event_id));
 	}
 }
 
