@@ -17,6 +17,20 @@ class EventsController extends AppController {
 		//$this->Event->event_id = $event_id;
 		$this->set('event', $this->Event->findByEventId($event_id));
 	}
+	
+	/**
+	 * List: List events with AJAX-ified filters.
+	 */
+	function list() {
+		
+	}
+	
+	/**
+	 * Add: Display form for adding events.
+	 */
+	function add() {
+	
+	}
 }
 
 
