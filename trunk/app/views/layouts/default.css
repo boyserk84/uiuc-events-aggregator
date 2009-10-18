@@ -1,0 +1,187 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	background-color:#00ccff;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+}
+
+/* LINK */
+a{
+	
+}
+
+a:hover{
+	
+	
+}
+
+a:visited{
+	
+	
+}
+
+img a{
+	text-decoration:none;
+	border:none;
+}
+
+
+/* Wrapper and Static element */
+
+#header, #footer, #logo_head{
+	width:100%;
+	position:relative;
+	float:left;
+	background-repeat:no-repeat;
+}
+
+#wrapper {
+	margin:100px 25px 10px 17%;
+	width:845px;
+	min-width:845px;
+	max-width:845px;
+	position:absolute;
+	float:left;
+}
+
+#header {
+	height:28px;
+	background-image:url(pub_img/w_header.gif);
+}
+
+#logo_head {
+	min-height:50px;
+	margin:0px;
+}
+
+#footer {
+	height:37px;
+	background-image:url(pub_img/w_footer.gif);
+}
+
+.main {
+	width:100%;
+	margin:0px;
+	position:relative;
+	float:left;
+	min-height:10px;
+	background-image:url(pub_img/w_main.gif);
+	background-repeat:repeat-y;
+}
+
+/* Dynamic elements inside the wrapper */
+.sec_wrapper {
+	margin:10px;
+	width:825px;
+	min-height:2px;
+	position:relative;
+	float:left;
+}
+
+/* Most-Recent area */
+.recent_section {
+	margin-left:10px;
+	margin-top:10px;
+	width:432px;
+	min-height:5px;
+	position:relative;
+	float:left;
+}
+
+.recent_box{
+	background-image:url(pub_img/w_most_box.gif);
+	background-repeat:no-repeat;
+	width:432px;
+	height:352px;
+	padding:5px;
+	float:left;
+	position:relative;
+}
+
+/* HighLight area */
+.hl_section {
+	margin:10px;
+	width:360px;
+	height:415px;
+	position:relative;
+	float:left;
+}
+.hl_box {
+	width:295px;
+	height:100%;
+	background-color:#FCF;
+	position:relative;
+	float:left;
+}
+
+/* Search area */
+.search_section {
+	margin:10px;
+	padding-top:10px;
+	padding-left:10px;
+	width:795px;
+	height:81px;
+	background-image:url(pub_img/w_banner_bg01.png);
+	background-repeat:no-repeat;
+	position:relative;
+	float:left;
+}
+
+.search_box {
+	margin-top:15px;
+	margin-right:15px;
+	width:45%;
+	position:relative;
+	float:right;
+}
+
+/* Upcoming area */
+.upcoming_area {
+	height:310px;
+	width:100%;
+	padding-left:10px;
+	position:relative;
+	float:left;
+}
+.upcoming_box {
+	height:310px;
+	width:90%;
+	position:relative;
+	float:left;
+}
+
+/* Subscribe Area */
+.subscribe_area {
+	padding-top:20px;
+	padding-left:10px;
+	margin:10px;
+	width:795px;
+	height:91px;
+	background-image:url(pub_img/w_banner_bg02.png);
+	background-repeat:no-repeat;
+	position:relative;
+	float:left;
+}
+
+/* Menu */
+#menu {
+	margin-left:20px;
+	width:95%;
+	height:70px;
+	position:relative;
+	float:left;
+}
+
+
+/* Legal statement section */
+#footnote {
+	margin-top:25px;
+	width:100%;
+	min-height:30px;
+	position:relative;
+	float:left;
+	text-align:center;
+	font-size:10px;
+}
+
