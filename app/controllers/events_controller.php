@@ -21,7 +21,7 @@ class EventsController extends AppController {
 	/**
 	 * List: List events with AJAX-ified filters.
 	 */
-	function list() {
+	function search() {
 		
 	}
 	
