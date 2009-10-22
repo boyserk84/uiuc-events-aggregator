@@ -4,7 +4,7 @@
                        	  <img src="../pub_img/w_most_recent.png" width="369" height="58" />
                         	<div class="recent_box">
                                <!-- RECENT CONTENT GOES HERE -->
-							   <?php echo $content_for_layout ?> 
+							   
                         	</div>
                         </div>
           				<div class="hl_section">
