@@ -37,12 +37,13 @@ img a{
 }
 
 #wrapper {
-	margin:100px 25px 10px 17%;
+	margin-top: 100px;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
 	width:845px;
 	min-width:845px;
 	max-width:845px;
-	position:absolute;
-	float:left;
 }
 
 #header {
@@ -61,7 +62,8 @@ img a{
 }
 
 .main {
-	width:100%;
+	width:805px;
+	padding: 0px 20px 0px 20px;
 	margin:0px;
 	position:relative;
 	float:left;
@@ -166,7 +168,7 @@ img a{
 
 /* Menu */
 #menu {
-	margin-left:20px;
+	padding-left:20px;
 	width:95%;
 	height:70px;
 	position:relative;
