@@ -19,10 +19,12 @@ class EventsController extends AppController {
 	}
 	
 	/**
-	 * List: List events with AJAX-ified filters.
+	 * Search: List events with AJAX-ified filters.
 	 */
 	function search() {
-		
+		$conditions = array('event_datetime <=' => 'NOW()');
+		$list = $this->Event->find('all', array('conditions' => $conditions));
+		$this->set('eventList',$list);
 	}
 	
 	/**
