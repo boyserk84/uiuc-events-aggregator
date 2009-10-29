@@ -17,10 +17,7 @@
                 <!-- START OF SIDE IMAGE DISPLAY -->
                 <table width="55px" border="0" cellspacing="5" cellpadding="0">
                   <tr>
-                    <td height="200px">&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td><img src="pub_img/w_side_see_all.png" width="51" height="264"  /></td>
+                    <td><img src="pub_img/w_side_see_all.png"   /></td>
                   </tr>
                   <tr>
                     <td>&nbsp;</td>
