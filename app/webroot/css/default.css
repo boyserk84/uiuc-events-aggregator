@@ -200,3 +200,27 @@ img a{
 	font-size:10px;
 }
 
+
+/* Event Search Table Styles */
+.event_table {
+	width:98%;
+}
+
+.event_table td {
+	height:40px;
+	padding:3px;
+	border-bottom:1px solid #3399FF;
+}
+
+.event_table_row1 td {
+	background:white;
+}
+
+.event_table_row2 td {
+	background:#DDDDFF;
+}
+
+.event_table_actions_cell a {
+	color:#0066FF;
+	line-height:150%;
+}
