@@ -8,7 +8,7 @@
                 <img src="pub_img/w_event_detail.png" width="334" height="69" alt="event detail" />
                 	<div class="detail_box">
                   	<!-- DETAIL OF EVENT GOES HERE -->
-                     <h3><?php echo $event['Event']['event_title']; ?></h3>
+                     <h2><?php echo $event['Event']['event_title']; ?></h2>
                      <a href="<?php echo $event['Event']['event_link']; ?>">Website</a><br/>
                      Tagged: <?php echo $event['Event']['event_tags']; ?><br/>
                      <br/>
