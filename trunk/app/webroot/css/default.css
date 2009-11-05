@@ -152,6 +152,20 @@ img a{
 	float:left;
 }
 
+/* Detail area */
+#detail_area, #generic_area {
+	float:left;
+	margin: 20px;
+	width: 710px;
+}
+
+.detail_box {
+	background: #CCC;
+	margin-top: 20px;
+	min-height: 330px;
+	padding: 50px 5px 50px 5px;
+}
+
 /* Subscribe Area */
 .subscribe_area {
 	padding-top:20px;
