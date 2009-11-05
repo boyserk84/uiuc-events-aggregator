@@ -20,6 +20,9 @@ foreach ($eventList as $event) {
 	<td class="event_table_datetime_cell">
 		<?php echo $event['Event']['event_datetime']; ?>	
 	</td>
+	<td class="event_table_tags_cell">
+		
+	</td>
 	<td class="event_table_actions_cell">
 		<?php echo $html->link('More Info', 'events/details/' . $event['Event']['event_id']); 
 		if (!empty($event['Event']['event_link'])) {
