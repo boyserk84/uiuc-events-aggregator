@@ -1,5 +1,5 @@
 @charset "utf-8";
-/* CSS Document */
+/* CSS Document: Updated Version */
 body{
 	background-color:#00ccff;
 	font-family:Verdana, Geneva, sans-serif;
@@ -159,12 +159,32 @@ img a{
 	width: 725px;
 }
 
+/* Sorting menu */
 .detail_box {
 	background: #CCC;
 	margin-top: 20px;
 	min-height: 330px;
 	padding: 50px 5px 50px 5px;
 }
+
+.detail_box_sort a{
+	text-decoration:none;	
+	font-weight:normal;
+}
+
+.generic_box {
+	background-color:#f3d6d6;
+	padding:5px;
+}
+
+.detail_box, .generic_box{
+	margin-top:5%;
+	width:670px;
+	position:relative;
+	float:left;
+	min-height:200px;	
+}
+
 
 /* Subscribe Area */
 .subscribe_area {
