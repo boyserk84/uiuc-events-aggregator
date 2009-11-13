@@ -18,7 +18,7 @@ class EventsController extends AppController {
 	 */
 	function details($event_id) {
 		//$this->Event->event_id = $event_id;
-		$this->set('event', $this->Event->findByEventId($event_id));
+		$this->set('event', $this->Event->findById($event_id));
 	}
 	
 	/**
@@ -29,9 +29,9 @@ class EventsController extends AppController {
 		$conditions = NULL;//array('conditions' => array('event_datetime <=' => 'NOW()'));
 		
 		$this->Pagination->modelClass = "Event";
-        list($order,$limit,$page) = $this->Pagination->init($conditions); // Added 
-		echo($order . ", " . $limit . ", " . $page);
-		$list = $this->Event->find('all', $conditions, NULL, $order, $limit, $page);
+        list($order,$limit,$page) = $this->Pagination->init($conditions, array('show' => 15)); // Added
+		print_r($order);
+		$list = $this->Event->find('all', array('order' => array($order), 'limit' => $limit, 'page' => $page));
 
 		$this->set('eventList',$list);
 	}

@@ -171,6 +171,8 @@ class PaginationComponent extends Object
  */
     function init($criteria=NULL,$parameters=Array(),$options=Array())
     {
+		print_r($parameters);
+		$numShow = $parameters["show"];
 		uses('sanitize');
 		$this->Sanitize = &new Sanitize;
 
@@ -181,11 +183,13 @@ class PaginationComponent extends Object
 		$this->_initURL();
 
 		$this->_setParameter("show",$parameters);
+		$this->paging["show"] = $numShow;
+		print_r($this->paging);
 		// If the number of results per page isn't in the list, reset to default
-		if ((isset($this->paging["show"]))&&(!in_array($this->paging["show"],$this->resultsPerPage)))
-		{
-			$this->paging["show"]=$this->paging['Defaults']['show'];
-		}
+//		if ((isset($this->paging["show"]))&&(!in_array($this->paging["show"],$this->resultsPerPage)))
+	//	{
+		//	$this->paging["show"]=$this->paging['Defaults']['show'];
+		//}
 		
 		$this->_setParameter("page",$parameters);
 		$this->_setParameter("sortBy",$parameters);
