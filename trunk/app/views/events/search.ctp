@@ -34,7 +34,7 @@ foreach ($eventList as $event) {
 		?>
 	</td>
 	<td class="event_table_actions_cell">
-		<?php echo $html->link('More Info', 'details/' . $event['Event']['event_id']); 
+		<?php echo $html->link('More Info', 'details/' . $event['Event']['id']); 
 		if (!empty($event['Event']['event_link'])) {
 			echo "<br/>" . $html->link('Event Webpage', $event['Event']['event_link']);
 		}
