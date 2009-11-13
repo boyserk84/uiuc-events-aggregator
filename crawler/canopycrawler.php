@@ -106,7 +106,8 @@ class CanopyClubCrawler extends FeedCrawler {
 			
 			//Add event to eventData.
 		global $eventData;
-		$event['name'] = $d_band . " with " . $d_opening;
+		$event['name'] = $d_band
+		if($d_opening != '') $event['name'] .= " with " . $d_opening;
 		$event['date'] = $d_date;
 		$event['time'] = $d_time;
 		$event['price'] = $d_price;
