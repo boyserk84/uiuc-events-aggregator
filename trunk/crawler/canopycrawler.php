@@ -34,7 +34,18 @@ class CanopyClubCrawler extends FeedCrawler {
 
 	public $eventData;
 
+
+	function clear_table_of_source($source_id)
+	{
+		$source_id = (int)$source_id;
+		$query = "DELETE FROM events_raw_events WHERE source_id = ".$source_id;
+		mysql_query($query,$this->db);
+	}
+	
+	
 	function run($urlTarget) {
+	
+		$this->clear_table_of_source(2);
 		$file = implode(file('http://www.canopyclub.com/canopy.php'));
 		$file = str_replace("\n","",$file);
 		preg_match_all('/\<div class\=\"show\"\>(.*?)\<p class\=\"info\"\>(.*?)\<\/p\>.+?\<\/div\>/',$file,$matches,PREG_PATTERN_ORDER);
