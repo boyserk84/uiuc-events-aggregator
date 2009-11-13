@@ -3,6 +3,8 @@
 <p>Some filters will go here?</p>
 <table class="event_table" cellpadding="0" cellspacing="0" align="center">
 <?php
+$pagination->setPaging($paging); // Initialize the pagination variables
+
 $row = 0;
 foreach ($eventList as $event) {
 	$row = (1 - $row);
@@ -21,10 +23,18 @@ foreach ($eventList as $event) {
 		<?php echo $event['Event']['event_datetime']; ?>	
 	</td>
 	<td class="event_table_tags_cell">
-		
+		<?php
+			$tags = explode(',', $event['Event']['event_tags']);
+			$tagLinks = array();
+			foreach ($tags as $tag) {
+				$tag = trim($tag);
+				$tagLinks[] = "<a href='/search/tag:{$tag}'>$tag</a>";
+			}
+			echo implode(", ", $tagLinks);
+		?>
 	</td>
 	<td class="event_table_actions_cell">
-		<?php echo $html->link('More Info', 'events/details/' . $event['Event']['event_id']); 
+		<?php echo $html->link('More Info', 'details/' . $event['Event']['event_id']); 
 		if (!empty($event['Event']['event_link'])) {
 			echo "<br/>" . $html->link('Event Webpage', $event['Event']['event_link']);
 		}
@@ -32,6 +42,11 @@ foreach ($eventList as $event) {
 	</td>
 </tr>
 
-<? } ?>
+<? }
+
+ ?>
 </table>
+
+<? echo $this->renderElement('pagination'); // Render the pagination element ?> 
+
 </div>
