@@ -9,6 +9,9 @@
 class EventsController extends AppController {
 	// Define a name.
 	var $name = 'Events';
+	// Components and helpers needed.
+    var $components = array ('Pagination'); 
+    var $helpers = array('Pagination'); 
 
 	/**
 	 * Details: A function to display the details of an event.
@@ -22,8 +25,14 @@ class EventsController extends AppController {
 	 * Search: List events with AJAX-ified filters.
 	 */
 	function search() {
-		$conditions = array('event_datetime <=' => 'NOW()');
-		$list = $this->Event->find('all', array('conditions' => $conditions));
+		//  Paginate the list.
+		$conditions = NULL;//array('conditions' => array('event_datetime <=' => 'NOW()'));
+		
+		$this->Pagination->modelClass = "Event";
+        list($order,$limit,$page) = $this->Pagination->init($conditions); // Added 
+		echo($order . ", " . $limit . ", " . $page);
+		$list = $this->Event->find('all', $conditions, NULL, $order, $limit, $page);
+
 		$this->set('eventList',$list);
 	}
 	
