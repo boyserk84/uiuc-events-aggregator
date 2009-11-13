@@ -10,6 +10,10 @@ class Event extends AppModel {
 	// CakePHP will automatically assume this model works off of
 	// a database called `events`, which saves us time: we don't
 	// have to write out all the fields and such for it.
+	
+	function findCount($conditions) {
+		return $this->find('count', $conditions);
+	}
 }
 
 
