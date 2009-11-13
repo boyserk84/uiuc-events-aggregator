@@ -22,7 +22,7 @@ class FeedCrawler {
 		$datetime = strtotime($date ." ". $time);
 		
 		
-		$sql = "INSERT INTO `events`.`events_raw_events` (`source_id`, `event_time_added_at`, `event_title`, `event_description`, `event_datetime`, `event_location`, `event_link`, `event_tags`) VALUES (".$source_id.", NOW(), '".$name."', '".$desc."', FROM_UNIXTIME(".$datetime."), '.".$location.".', '".$link."', '".$tags."');";
+		$sql = "INSERT INTO `events`.`events_raw_events` (`source_id`, `event_time_added_at`, `event_title`, `event_description`, `event_datetime`, `event_location`, `event_link`, `event_tags`) VALUES (".$source_id.", NOW(), '".$name."', '".$desc."', FROM_UNIXTIME(".$datetime."), '".$location."', '".$link."', '".$tags."');";
 		
 		echo($sql);
 		mysql_query($sql,$this->db);
@@ -112,7 +112,7 @@ class CanopyClubCrawler extends FeedCrawler {
 	
 	function submitEventDataToDB($event)
 	{
-		parent::submitEventDataToDatabase($event['name'],$event['date'],$event['time'],$event['price'].": ".$event['desc'],$event['location'],2,"www.canopyclub.com","canopy, club, music");
+		parent::submitEventDataToDatabase($event['name'],$event['date'],$event['time'],$event['price'].": ".$event['desc'],$event['location'],2,"http://www.canopyclub.com","canopy, club, music");
 	}
 
 }
