@@ -26,12 +26,12 @@ class EventsController extends AppController {
 	 */
 	function search() {
 		//  Paginate the list.
-		$conditions = NULL;//array('conditions' => array('event_datetime <=' => 'NOW()'));
+		$conditions = array('event_datetime >=' => date('Y-m-d G:i a'));
 		
 		$this->Pagination->modelClass = "Event";
         list($order,$limit,$page) = $this->Pagination->init($conditions, array('show' => 15)); // Added
-		print_r($order);
-		$list = $this->Event->find('all', array('order' => array($order), 'limit' => $limit, 'page' => $page));
+
+		$list = $this->Event->find('all', array('conditions' => $conditions, 'order' => array($order), 'limit' => $limit, 'page' => $page));
 
 		$this->set('eventList',$list);
 	}
