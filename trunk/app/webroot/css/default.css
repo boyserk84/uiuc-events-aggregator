@@ -139,14 +139,14 @@ img a{
 
 /* Upcoming area */
 .upcoming_area {
-	height:310px;
+	min-height:310px;
 	width:100%;
 	padding-left:10px;
 	position:relative;
 	float:left;
 }
 .upcoming_box {
-	height:310px;
+	min-height:310px;
 	width:90%;
 	position:relative;
 	float:left;
@@ -252,3 +252,32 @@ img a{
 	font-size:14px;
 	line-height:160%;
 }
+
+/* Recent Event Table Styles */
+.recent_event_table {
+	color: #ffffff;
+	margin-right: 16px;
+	margin-top: 10px;
+	width:95%;
+}
+
+.recent_event_table a {
+	color: #3399FF;
+}
+
+.recent_event_table td {
+	height:40px;
+	padding:3px;
+	border-bottom:1px solid #aaaaaa;
+}
+
+.recent_event_table_row1 td {
+	background:#000000;
+}
+
+.recent_event_table_row2 td {
+	background:#000000;
+	border-bottom: 0px;
+}
+
+
