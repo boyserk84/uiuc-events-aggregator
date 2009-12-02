@@ -8,12 +8,11 @@ body{
 
 /* LINK */
 a{
-	
+	text-decoration:none;
 }
 
 a:hover{
-	
-	
+	color:#F00;
 }
 
 a:visited{
@@ -177,7 +176,11 @@ img a{
 	padding:5px;
 }
 
-.detail_box, .generic_box{
+.generic_box_no_color{
+	padding:5px;
+}
+
+.detail_box, .generic_box, .generic_box_no_color{
 	margin-top:5%;
 	width:670px;
 	position:relative;
