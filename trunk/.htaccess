@@ -1,4 +1,6 @@
    RewriteEngine on
-   RewriteRule    ^$ app/webroot/    [L]
+   RewriteRule	  crawler/(.*) crawler/$1 [L]
    RewriteRule    .*/pub_img/(.*) app/webroot/pub_img/$1 [L]
+   RewriteRule    .*/pub_icons/(.*) app/webroot/pub_icons/$1 [L]
+   RewriteRule    ^$ app/webroot/    [L]
    RewriteRule    (.*) app/webroot/$1 [L]
