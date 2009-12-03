@@ -1,10 +1,10 @@
 <?php
-
+define ('ILLINI_PERFORMANCES',3);
 class FeedCrawler {
 	public $db;
 	function run($urlTarget) {
 
-	}
+	} 
 	
 	function connectToDatabase()
 	{
@@ -26,8 +26,72 @@ class FeedCrawler {
 		
 		echo($sql);
 		mysql_query($sql,$this->db);
+		 
 	}
 	 
+}
+
+class IllinoisPerformancesCrawler extends FeedCrawler {
+	public $eventData;
+
+	function clear_table_of_source($source_id)
+	{
+		$source_id = 3;
+		$query = "DELETE FROM events_raw_events WHERE source_id = ".$source_id;
+		mysql_query($query,$this->db);
+	}
+	
+	function run()
+	{
+		$this->connectToDatabase();
+		$this->clear_table_of_source(ILLINI_PERFORMANCES);
+		
+		
+		$target_url = "http://illinois.edu/calendar/RSS?calId=597";
+		$file = implode(file($target_url));
+		$file = str_replace("\n","",$file);		
+		
+		$element = simplexml_load_string($file);
+		$child = $element->channel;
+		
+		foreach($child->children() as $item)
+		{
+		
+
+			if ($item->title != "")
+			{
+				echo("<hr>");
+				//print_r($item->children());
+				echo("Title:".$item->title);
+				
+
+				$file = implode(file($item->link));
+				$file = str_replace("\n","",$file);
+		
+				preg_match("/<td class\=\"edu\-uiuc\-webservices\-calendar\-category\"\>Location\<\/td\>\<td\>\&nbsp\;\<\/td\>\<td class\=\"edu\-uiuc\-webservices\-calendar\-info\"\>(.+?)\<\/td\>/",$file,$matches_place);
+		
+		
+				preg_match("/<td class\=\"edu\-uiuc\-webservices\-calendar\-category\"\>Cost\<\/td\>\<td\>\&nbsp\;\<\/td\>\<td class\=\"edu\-uiuc\-webservices\-calendar\-info\"\>(.+?)\<\/td\>/",$file,$matches_cost);
+		
+				//Add event to eventData.
+				
+				//global $eventData;
+
+				$event['time'] = strtotime($item->date);
+				$event['desc'] = $item->description;
+				//$eventData[$key] = $event;
+
+				
+				parent::submitEventDataToDatabase($item->title,"",$event['time'],$matches_cost[1]." ".$item->description,$matches_place[1],ILLINI_PERFORMANCES,$item->link,					"illini,performance");
+							
+			}
+		
+		}
+		
+	
+	}
+
+
 }
 
 class CanopyClubCrawler extends FeedCrawler {
@@ -106,7 +170,7 @@ class CanopyClubCrawler extends FeedCrawler {
 			
 			//Add event to eventData.
 		global $eventData;
-		$event['name'] = $d_band
+		$event['name'] = $d_band;
 		if($d_opening != '') $event['name'] .= " with " . $d_opening;
 		$event['date'] = $d_date;
 		$event['time'] = $d_time;
@@ -128,9 +192,6 @@ class CanopyClubCrawler extends FeedCrawler {
 	}
 
 }
-
-
-
 
 
 
