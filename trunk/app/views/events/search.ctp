@@ -11,7 +11,7 @@ foreach ($eventList as $event) {
 ?>
 <tr class="event_table_row<?php echo ($row+1); ?>">
 	<td class="event_table_icon_cell">
-		Icons
+		<?php echo Event::getIcons($event['Event']); ?>
 	</td>
 	<td class="event_table_title_cell">		
 		<?php echo $event['Event']['event_title']; ?>	
