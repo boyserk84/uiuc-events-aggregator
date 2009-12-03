@@ -31,6 +31,12 @@ class Event extends AppModel {
 				case 'illini':
 					$icon = "wmonkey_icon01_i";
 					break;
+				case 'christmas':
+					$icon = "wmonkey_icon08_xmas";
+					break;
+				case 'food':
+					$icon = "wmonkey_icon13_pizza";
+					break;
 			}
 
 			if ($icon != "")
