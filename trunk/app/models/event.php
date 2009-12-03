@@ -14,7 +14,33 @@ class Event extends AppModel {
 	function findCount($conditions) {
 		return $this->find('count', $conditions);
 	}
+
+	/**
+	 * Get an HTML string of icons for this event.
+	 */
+	function getIcons($data) {
+		$str = "";
+			
+		// Iterate through tags.
+		foreach (split(', ?', $data['event_tags']) as $tag) {
+			$icon = "";
+			switch ($tag) {
+				case 'music':
+					$icon = "wmonkey_icon03_piano";
+					break;
+				case 'illini':
+					$icon = "wmonkey_icon01_i";
+					break;
+			}
+
+			if ($icon != "")
+				$str .= "<img src='pub_icons/" . $icon . ".gif' alt=\"$tag\" title=\"$tag\"/>";
+		}
+		
+		return $str;
+	}
 }
+
 
 
 ?>
