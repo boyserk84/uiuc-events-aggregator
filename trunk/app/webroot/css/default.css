@@ -19,6 +19,9 @@ a:visited{
 	
 	
 }
+img {
+	border:none;	
+}
 
 img a{
 	text-decoration:none;
