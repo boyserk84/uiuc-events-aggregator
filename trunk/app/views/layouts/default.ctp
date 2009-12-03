@@ -39,10 +39,10 @@
                     <!-- MENU -->
                     <div class="sec_wrapper">
                     	<div id="menu">
-                   	    <img src="pub_img/w_add_button.png" width="210" height="62" />
-                        <img src="pub_img/w_seeall_button.png" width="193" height="61" />
-                        <img src="pub_img/w_about_us_button.png" width="169" height="62" />
-                        <img src="pub_img/w_feedback_button.png" width="190" height="62" /></div>
+                   	    <a href="pages/add"> <img src="pub_img/w_add_button.png" width="210" height="62" /> </a>
+                        <a href="pages/seeall"> <img src="pub_img/w_seeall_button.png" width="193" height="61" /> </a>
+                        <a href="pages/aboutus"> <img src="pub_img/w_about_us_button.png" width="169" height="62" /> </a>
+                        <a href="pages/feedback"> <img src="pub_img/w_feedback_button.png" width="190" height="62" /></div> </a>
                     </div>
                     <!-- END OF MENU -->
                     
