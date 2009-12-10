@@ -13,6 +13,7 @@
 	<div id="wrapper">
     	<div id="logo_head">
         	<!-- TOP OF THE PAGE LOGO HERE -->
+			<img src="pub_img/logo_mevent.png" alt="MeVents brought to you by ACM UIUC Web Monkey (Fall2009)" />
         </div>
    	    <div id="header"></div>
         	<div class="main">
