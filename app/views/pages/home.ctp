@@ -56,13 +56,13 @@
                     	<div class="search_section">
                         	<img src="pub_img/w_search.png" width="393" height="54" align="left" />
                         	<div class="search_box">
-                        	  <form id="search" name="search" method="post" action="">
+                        	  <form id="search" name="search" method="post" action="events/search">
                               		<input name="search" type="text" size="30" maxlength="150" />
                                     <input name="search" type="submit" value="Search Event" />
                       	      </form>
                    	        </div>
              		 </div></div>
-                    <!-- End of Search Seciton-->
+                    <!-- End of Search Section-->
                     
                     <!-- Upcoming events -->
                     <div class="sec_wrapper">
