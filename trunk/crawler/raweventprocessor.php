@@ -1,7 +1,7 @@
 <?php
 
 define("CANOPY_CLUB", 2);
-define("ILLINI_PERFORMANCES",3);
+//define("ILLINI_PERFORMANCES",3);
 class RawEventProcessor
 {
 
