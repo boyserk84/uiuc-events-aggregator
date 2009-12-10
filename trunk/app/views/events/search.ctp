@@ -1,6 +1,12 @@
 <div style='padding-left:14px;padding-right:14px;'>
 <h1>Search Events:</h1>
-<p>Some filters will go here?</p>
+                        	<div class="search">
+                        	  <form id="search" name="search" method="post" action="">
+                              		<input name="search_text" type="text" size="30" maxlength="150" />
+                                    <input name="search" type="submit" value="Search Event" />
+                      	      </form>
+                   	        </div>
+
 <table class="event_table" cellpadding="0" cellspacing="0" align="center">
 <?php
 $pagination->setPaging($paging); // Initialize the pagination variables
