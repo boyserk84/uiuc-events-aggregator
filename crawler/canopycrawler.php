@@ -1,5 +1,5 @@
 <?php
-define ('ILLINI_PERFORMANCES',3);
+define ('ILLINI_PERFORMANCES',3); 
 class FeedCrawler {
 	public $db;
 	function run($urlTarget) {
@@ -14,20 +14,54 @@ class FeedCrawler {
 	function submitEventDataToDatabase($name,$date,$time,$desc,$location,$source_id,$link,$tags)
 	{
 		$this->connectToDatabase();
+		
 		$name = mysql_real_escape_string($name);
 		$date = mysql_real_escape_string($date);
 		$time = mysql_real_escape_string($time);
+
 		$desc = mysql_real_escape_string(strip_tags($desc));
 		$location = mysql_real_escape_string($location);
 		$datetime = strtotime($date ." ". $time);
+
+		if ($datetime < time()) 
 		
+		{ $datetime = mktime(
+		date("G",$datetime),
+		date("i",$datetime),
+		date("s",$datetime),
+		date("m",$datetime),
+		date("d",$datetime),
+		date("y",$datetime)+1);
+		}
 		
 		$sql = "INSERT INTO `events`.`events_raw_events` (`source_id`, `event_time_added_at`, `event_title`, `event_description`, `event_datetime`, `event_location`, `event_link`, `event_tags`) VALUES (".$source_id.", NOW(), '".$name."', '".$desc."', FROM_UNIXTIME(".$datetime."), '".$location."', '".$link."', '".$tags."');";
 		
 		echo($sql);
 		mysql_query($sql,$this->db);
-		 
+		 echo("***SUBMITTED***");
 	}
+
+	function submitEventDataToDatabaseTimeStamp($name,$date,$timestamp,$desc,$location,$source_id,$link,$tags)
+	{
+		$this->connectToDatabase();
+		
+		$name = mysql_real_escape_string($name);
+		$date = mysql_real_escape_string($date);
+
+
+		$desc = mysql_real_escape_string(strip_tags($desc));
+		$location = mysql_real_escape_string($location);
+
+
+		
+		
+		$sql = "INSERT INTO `events`.`events_raw_events` (`source_id`, `event_time_added_at`, `event_title`, `event_description`, `event_datetime`, `event_location`, `event_link`, `event_tags`) VALUES (".$source_id.", NOW(), '".$name."', '".$desc."', FROM_UNIXTIME(".$timestamp."), '".$location."', '".$link."', '".$tags."');";
+		
+		echo($sql);
+		mysql_query($sql,$this->db);
+		 echo("***SUBMITTED***");
+	}
+
 	 
 }
 
@@ -36,7 +70,7 @@ class IllinoisPerformancesCrawler extends FeedCrawler {
 
 	function clear_table_of_source($source_id)
 	{
-		$source_id = 3;
+		$source_id = $source_id;
 		$query = "DELETE FROM events_raw_events WHERE source_id = ".$source_id;
 		mysql_query($query,$this->db);
 	}
@@ -77,12 +111,12 @@ class IllinoisPerformancesCrawler extends FeedCrawler {
 				
 				//global $eventData;
 
-				$event['time'] = strtotime($item->date);
+				$event['time'] = strtotime($item->pubDate);
 				$event['desc'] = $item->description;
 				//$eventData[$key] = $event;
 
 				
-				parent::submitEventDataToDatabase($item->title,"",$event['time'],$matches_cost[1]." ".$item->description,$matches_place[1],ILLINI_PERFORMANCES,$item->link,					"illini,performance");
+				parent::submitEventDataToDatabaseTimeStamp($item->title,"",$event['time'],$matches_cost[1]." ".$item->description,$matches_place[1],ILLINI_PERFORMANCES,$item->link,					"illini,performance");
 							
 			}
 		
@@ -107,9 +141,9 @@ class CanopyClubCrawler extends FeedCrawler {
 	}
 	
 	
-	function run($urlTarget) {
-	
-		$this->clear_table_of_source(2);
+	function run() {
+		
+	//	$this->clear_table_of_source(2);
 		$file = implode(file('http://www.canopyclub.com/canopy.php'));
 		$file = str_replace("\n","",$file);
 		preg_match_all('/\<div class\=\"show\"\>(.*?)\<p class\=\"info\"\>(.*?)\<\/p\>.+?\<\/div\>/',$file,$matches,PREG_PATTERN_ORDER);
