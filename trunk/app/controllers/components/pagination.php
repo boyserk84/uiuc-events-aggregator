@@ -171,7 +171,7 @@ class PaginationComponent extends Object
  */
     function init($criteria=NULL,$parameters=Array(),$options=Array())
     {
-		print_r($parameters);
+		//print_r($parameters);
 		$numShow = $parameters["show"];
 		uses('sanitize');
 		$this->Sanitize = &new Sanitize;
@@ -184,7 +184,7 @@ class PaginationComponent extends Object
 
 		$this->_setParameter("show",$parameters);
 		$this->paging["show"] = $numShow;
-		print_r($this->paging);
+		//print_r($this->paging);
 		// If the number of results per page isn't in the list, reset to default
 //		if ((isset($this->paging["show"]))&&(!in_array($this->paging["show"],$this->resultsPerPage)))
 	//	{
@@ -207,13 +207,13 @@ class PaginationComponent extends Object
 		$this->_setPrivateParameter("paramSeperator");
 		$this->_setPrivateParameter("url");
 
-		if (isset($this->total)) // If the field is already set, we  passed in the options the total number of results
+		if (false && isset($this->total)) // If the field is already set, we  passed in the options the total number of results
 		{
 			$count = $this->total;
 		}
 		else
 		{
-			$count = $this->controller->{$this->modelClass}->findCount($criteria,0);	
+			$count = $this->controller->{$this->modelClass}->find('count', array('conditions' => $criteria));	
 		}
 		$this->checkPage($count);
 		$this->paging['total'] = $count;

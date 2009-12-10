@@ -26,7 +26,7 @@ class EventsController extends AppController {
 	 */
 	function search() {
 		//  Paginate the list.
-		$conditions = array('event_datetime >=' => date('Y-m-d G:i a'));
+		$conditions = array('event_datetime >=' => date('Y-m-d G:i:00'));
 		
 		$this->Pagination->modelClass = "Event";
         list($order,$limit,$page) = $this->Pagination->init($conditions, array('show' => 15)); // Added
