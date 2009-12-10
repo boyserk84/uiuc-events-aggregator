@@ -39,10 +39,11 @@
                     <!-- MENU -->
                     <div class="sec_wrapper">
                     	<div id="menu">
-                   	    <a href="pages/add"> <img src="pub_img/w_add_button.png" width="210" height="62" /> </a>
-                        <a href="pages/seeall"> <img src="pub_img/w_seeall_button.png" width="193" height="61" /> </a>
-                        <a href="pages/aboutus"> <img src="pub_img/w_about_us_button.png" width="169" height="62" /> </a>
-                        <a href="pages/feedback"> <img src="pub_img/w_feedback_button.png" width="190" height="62" /></div> </a>
+				<?php echo $html->link('<img src="pub_img/w_add_button.png" width="210" height="62" />', '/pages/add', array('escape'=>false)); ?>
+				<?php echo $html->link('<img src="pub_img/w_seeall_button.png" width="193" height="61" />', '/events/search', array('escape'=>false)); ?>
+				<?php echo $html->link('<img src="pub_img/w_about_us_button.png" width="169" height="62" />', '/pages/aboutus', array('escape'=>false)); ?>
+				<?php echo $html->link('<img src="pub_img/w_feedback_button.png" width="190" height="62" />', '/pages/feedback', array('escape'=>false)); ?>
+                        </div>
                     </div>
                     <!-- END OF MENU -->
                     

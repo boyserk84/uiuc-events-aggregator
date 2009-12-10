@@ -5,40 +5,40 @@
 			  <div class="generic_box_no_color">
             				<h2>About us</h2>
                       <p>Wanna know about us? Here is who we are.</p>
-                    <fieldset><legend><b>ACM WebMonkey at Univeristy of Illinois at Urbana-Champaign </b></legend>
-                      <img src="" width="600px" height="200px" alt="[Picture of Staff] 600x200 overhere"/>
+                    <fieldset><legend><b>ACM Webmonkeys at the University of Illinois at Urbana-Champaign </b></legend>
+<!--                      <img src="" width="600px" height="200px" alt="[Picture of Staff] 600x200 overhere"/> -->
                 <table width="100%" border="0" cellspacing="5" cellpadding="0">
                               <tr>
-                                <td width="50%"><strong>Back-end Programmer</strong></td>
-                                <td width="50%"><strong>Front-end/UI Designer</strong></td>
+                                <td width="50%"><strong>Back-end Programmers</strong></td>
+                                <td width="50%"><strong>Front-end/UI Designers</strong></td>
                               </tr>
                               <tr>
-                                <td>Name1</td>
-                                <td>Name1</td>
-                              </tr>
-                              <tr>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                              </tr>
-                              <tr>
-                                <td>Name1</td>
-                                <td>Name1</td>
+                                <td>Robert Nubel</td>
+                                <td>Nate Nattapol Kemavaha</td>
                               </tr>
                               <tr>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                               </tr>
                               <tr>
-                                <td>Name1</td>
-                                <td>Name1</td>
+                                <td>Ted Nubel</td>
+                                <td></td>
                               </tr>
                               <tr>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                               </tr>
                               <tr>
-                                <td>Name1</td>
-                                <td>Name1</td>
+                                <td>Dan Larkin</td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td></td>
                               </tr>
                               <tr>
                                 <td>&nbsp;</td>
@@ -48,11 +48,11 @@
 
                             </fieldset>
                               <fieldset><legend><b>Technical Support</b> </legend>
-                                Please e-mail us at <a href="mailto:xxxx@xxx.com">xxxxxx@xxxxxx.com</a>
+                                Please e-mail us at <a href="mailto:webmonkeys@acm.uiuc.edu">webmonkeys@acm.uiuc.edu</a>
                             </fieldset>
                             <fieldset> <legend> <b>Links </b> </legend>
-                            <b> ACM : </b> http://www.acm.uiuc.edu <br/>
-                            <b>WebMonkey: </b>http:// 
+                            <b>ACM : </b><a href='http://www.acm.uiuc.edu'>http://www.acm.uiuc.edu</a><br/>
+                            <b>Webmonkeys: </b><a href='http://www.acm.uiuc.edu/webmonkeys'>http://www.acm.uiuc.edu/webmonkeys</a></b>
                             </fieldset>
                           </div>
                   </div>
