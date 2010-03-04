@@ -1,5 +1,6 @@
 <?php
 define ('ILLINI_PERFORMANCES',3); 
+define ('ILLINI_SPEAKERS',4); 
 class FeedCrawler {
 	public $db;
 	function run($urlTarget) {
@@ -75,13 +76,24 @@ class IllinoisPerformancesCrawler extends FeedCrawler {
 		mysql_query($query,$this->db);
 	}
 	
-	function run()
+	function run($cal_id)
 	{
 		$this->connectToDatabase();
-		$this->clear_table_of_source(ILLINI_PERFORMANCES);
+		
+		if ($cal_id == 597) //PERFORMANCES
+		{
+				$this->clear_table_of_source(ILLINI_PERFORMANCES);
+				$source = ILLINI_PERFORMANCES;
+		}
+		elseif ($cal_id == 598) //SPEAKERS
+		{ 
+			echo("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*************@@@@@@@@@@@@@@@@@@@@@@");
+				$this->clear_table_of_source(ILLINI_SPEAKERS);
+				$source = ILLINI_SPEAKERS;
+		}
 		
 		
-		$target_url = "http://illinois.edu/calendar/RSS?calId=597";
+		$target_url = "http://illinois.edu/calendar/RSS?calId=".$cal_id;
 		$file = implode(file($target_url));
 		$file = str_replace("\n","",$file);		
 		
@@ -116,7 +128,7 @@ class IllinoisPerformancesCrawler extends FeedCrawler {
 				//$eventData[$key] = $event;
 
 				
-				parent::submitEventDataToDatabaseTimeStamp($item->title,"",$event['time'],$matches_cost[1]." ".$item->description,$matches_place[1],ILLINI_PERFORMANCES,$item->link,					"illini,performance");
+				parent::submitEventDataToDatabaseTimeStamp($item->title,"",$event['time'],$matches_cost[1]." ".$item->description,$matches_place[1],$source,$item->link,					($source==3?"illinois,performance":"speaker,illinois"));
 							
 			}
 		
