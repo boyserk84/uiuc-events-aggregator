@@ -45,7 +45,7 @@ class EventsController extends AppController {
 	 * Add: Display form for adding events.
 	 */
 	function add() {
-	
+		// TODO: Implementation for adding events to the database
 	}
 }
 
