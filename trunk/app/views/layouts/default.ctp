@@ -51,7 +51,9 @@
                     <!--FOOT NOTE -->
                     <div class="sec_wrapper">
                     	<div id="footnote">
-                    		Disclaimer | Privacy Policy | Terms of Service | Technical Support <br/>
+                    		<?php echo $html->link('Disclaimer', '/pages/disclaimer', array('escape'=>false)); ?> | 
+							<?php echo $html->link('Privacy Policy', '/pages/privacy', array('escape'=>false)); ?> | 
+							<?php echo $html->link('Terms of Service', '/pages/tos', array('escape'=>false)); ?> | <a href="mailto:webmonkeys@acm.uiuc.edu "> Technical Support </a> <br/>
                             Copyright &copy; 2009 ACM: UIUC WebMonkeys. All rights reserved. 
                     	</div>
                     </div>
