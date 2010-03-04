@@ -1,7 +1,8 @@
 <?php
 
 define("CANOPY_CLUB", 2);
-//define("ILLINI_PERFORMANCES",3);
+/*define("ILLINI_PERFORMANCES",3);
+define("ILLINI_SPEAKERS",4);*/
 class RawEventProcessor
 {
 
@@ -35,6 +36,9 @@ class RawEventProcessor
 				$this->insert_data_directly_from_source($source_id);
 				break;
 			case ILLINI_PERFORMANCES:
+				$this->insert_data_directly_from_source($source_id);
+				break;
+			case ILLINI_SPEAKERS:
 				$this->insert_data_directly_from_source($source_id);
 				break;
 		
