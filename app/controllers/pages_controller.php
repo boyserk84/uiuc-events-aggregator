@@ -8,7 +8,7 @@ class PagesController extends AppController {
       $this->eventModel = ClassRegistry::init('Event');
 
   		$conditions = array('event_datetime >=' => date('Y-m-d G:i a'));
-		$list = $this->eventModel->find('all', array('conditions' => $conditions, 'limit' => 10));
+		$list = $this->eventModel->find('all', array('conditions' => $conditions, 'limit' => 10, 'order' => 'event_datetime ASC'));
 		$this->set('upcomingList',$list);
 
 		$list = $this->eventModel->find('all', array('order' => 'event_time_added_at DESC', 'limit' => 6));

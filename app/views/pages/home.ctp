@@ -25,7 +25,7 @@
                               <?php echo $event['Event']['event_datetime']; ?>	
                            </td>
                            <td class="recent_event_table_actions_cell">
-                              <?php echo $html->link('More Info', 'details/' . $event['Event']['id']); 
+                              <?php echo $html->link('More Info', '/events/details/' . $event['Event']['id']); 
                               if (!empty($event['Event']['event_link'])) {
                                  echo "<br/>" . $html->link('Event Webpage', $event['Event']['event_link']);
                               }
@@ -101,7 +101,7 @@
                               ?>
                            </td>
                            <td class="event_table_actions_cell">
-                              <?php echo $html->link('More Info', 'details/' . $event['Event']['id']); 
+                              <?php echo $html->link('More Info', '/events/details/' . $event['Event']['id']); 
                               if (!empty($event['Event']['event_link'])) {
                                  echo "<br/>" . $html->link('Event Webpage', $event['Event']['event_link']);
                               }

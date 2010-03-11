@@ -4,7 +4,7 @@
 <?php echo $html->css('default'); ?>
 <?php echo $scripts_for_layout ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>MEvent - ACM Webmonkeys @ UIUC</title>
 </head>
 
 
@@ -13,7 +13,7 @@
 	<div id="wrapper">
     	<div id="logo_head">
         	<!-- TOP OF THE PAGE LOGO HERE -->
-			<img src="pub_img/logo_mevent.png" alt="MeVents brought to you by ACM UIUC Web Monkey (Fall2009)" />
+			<?php echo $html->link('<img src="pub_img/logo_mevent.png" alt="MeVents brought to you by ACM UIUC Webmonkeys (Fall 2009)" />', '/', array('escape' => false)); ?>
         </div>
    	    <div id="header"></div>
         	<div class="main">
