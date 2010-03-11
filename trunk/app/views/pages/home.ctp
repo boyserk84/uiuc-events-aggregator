@@ -45,6 +45,7 @@
           				<div class="hl_section">
            					<div class="hl_box">
                             	<!-- HIGHLIGHT CONTENT GOES HERE -->
+								<img src="pub_img/il_ads.png" />
                             </div>
                         	<img src="pub_img/w_highlight_side.png" width="61" height="391" />
                         </div>
