@@ -1,5 +1,5 @@
 <?php 
-
+set_time_limit(0);
 include("./canopycrawler.php");
 include("./raweventprocessor.php");
 //Call canopy crawler.
