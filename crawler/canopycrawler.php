@@ -1,6 +1,7 @@
 <?php
 define ('ILLINI_PERFORMANCES',3); 
 define ('ILLINI_SPEAKERS',4); 
+define ('DB_NAME',"events");
 class FeedCrawler {
 	public $db;
 	function run($urlTarget) {
@@ -35,7 +36,7 @@ class FeedCrawler {
 		date("y",$datetime)+1);
 		}
 		
-		$sql = "INSERT INTO `events`.`events_raw_events` (`source_id`, `event_time_added_at`, `event_title`, `event_description`, `event_datetime`, `event_location`, `event_link`, `event_tags`) VALUES (".$source_id.", NOW(), '".$name."', '".$desc."', FROM_UNIXTIME(".$datetime."), '".$location."', '".$link."', '".$tags."');";
+		$sql = "INSERT INTO `".DB_NAME."`.`events_raw_events` (`source_id`, `event_time_added_at`, `event_title`, `event_description`, `event_datetime`, `event_location`, `event_link`, `event_tags`) VALUES (".$source_id.", NOW(), '".$name."', '".$desc."', FROM_UNIXTIME(".$datetime."), '".$location."', '".$link."', '".$tags."');";
 		
 		echo($sql);
 		mysql_query($sql,$this->db);
@@ -56,7 +57,7 @@ class FeedCrawler {
 
 		
 		
-		$sql = "INSERT INTO `events`.`events_raw_events` (`source_id`, `event_time_added_at`, `event_title`, `event_description`, `event_datetime`, `event_location`, `event_link`, `event_tags`) VALUES (".$source_id.", NOW(), '".$name."', '".$desc."', FROM_UNIXTIME(".$timestamp."), '".$location."', '".$link."', '".$tags."');";
+		$sql = "INSERT INTO `".DB_NAME."`.`events_raw_events` (`source_id`, `event_time_added_at`, `event_title`, `event_description`, `event_datetime`, `event_location`, `event_link`, `event_tags`) VALUES (".$source_id.", NOW(), '".$name."', '".$desc."', FROM_UNIXTIME(".$timestamp."), '".$location."', '".$link."', '".$tags."');";
 		
 		echo($sql);
 		mysql_query($sql,$this->db);
