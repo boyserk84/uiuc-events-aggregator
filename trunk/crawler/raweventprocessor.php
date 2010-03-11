@@ -60,7 +60,7 @@ class RawEventProcessor
 	function connectToDatabase()
 	{
 	 $this->db = mysql_connect("localhost","root","");
-	 mysql_select_db("events",$this->db);
+	 mysql_select_db(DB_NAME,$this->db);
 	}
 
 
