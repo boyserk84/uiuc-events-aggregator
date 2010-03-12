@@ -17,6 +17,9 @@
                                 <textarea name="comment" cols="75" rows="15"></textarea>
                                 
                                 </fieldset>
+								<div style='padding:8px;text-align:center;'>
+									<b>Note: At the moment, due to lack of time for implementation, the other end of this suggestion box is basically connected to a shredder. Sorry.</b>
+								</div>
                                 <input name="submit" type="submit" value="Tell us what you think" />
                                 <input name="" type="reset" />
                                 </form>

@@ -13,13 +13,13 @@
                         ?>
                         <tr class="recent_event_table_row<?php echo $row; ?>">
                            <td class="recent_event_table_icon_cell">
-                              <?php echo Event::getIcons($event['Event']); ?>
+                              <?php echo Event::getIcons($event['Event'],1); ?>
                            </td>
                            <td class="recent_event_table_title_cell">		
-                              <?php echo $event['Event']['event_title']; ?>	
+                              <?php echo substr($event['Event']['event_title'],0,50); ?>	
                            </td>
                            <td class="recent_event_table_location_cell">
-                              <?php echo $event['Event']['event_location']; ?>	
+                              <?php echo substr($event['Event']['event_location'],-51,51); ?>	
                            </td>
                            <td class="recent_event_table_datetime_cell">
                               <?php echo $event['Event']['event_datetime']; ?>	
@@ -42,11 +42,12 @@
 							   
                         	</div>
                         </div>
-          				<div class="hl_section">
-           					<div class="hl_box">
+          			<div class="hl_section">
+           				<div class="hl_box">
                             	<!-- HIGHLIGHT CONTENT GOES HERE -->
-								<img src="pub_img/il_ads.png" />
-                            </div>
+						<a href='events/details/100'><img src="pub_img/il_ads.png" /></a>
+                           	</div>
+					
                         	<img src="pub_img/w_highlight_side.png" width="61" height="391" />
                         </div>
                    </div>
@@ -76,11 +77,11 @@
                         foreach ($upcomingList as $event) {
                            $row = (1 - $row);
                         ?>
-                        <tr class="event_table_row<?php echo ($row+1); ?>">
-                           <td class="event_table_icon_cell">
+				<tr class="event_table_row<?php echo ($row+1); ?>" onmouseover="this.setAttribute('class','event_table_row3');" onmouseout="this.setAttribute('class','event_table_row<?php echo ($row+1); ?>');">
+                           <td class="event_table_icon_cell" width="64">
                               <?php echo Event::getIcons($event['Event']); ?>
                            </td>
-                           <td class="event_table_title_cell">		
+                           <td class="event_table_title_cell" onclick="window.location='events/details/<?php echo $event['Event']['id']; ?>';">		
                               <?php echo $event['Event']['event_title']; ?>	
                            </td>
                            <td class="event_table_location_cell">
@@ -95,7 +96,7 @@
                                  $tagLinks = array();
                                  foreach ($tags as $tag) {
                                     $tag = trim($tag);
-                                    $tagLinks[] = "<a href='/search/tag:{$tag}'>$tag</a>";
+                                    $tagLinks[] = "<a href='events/search/{$tag}'>$tag</a>";
                                  }
                                  echo implode(", ", $tagLinks);
                               ?>
@@ -114,9 +115,11 @@
                          ?>
                         </table>
 
-
-                      
-                             		<!-- Future Events GO HERE -->
+					<div class='moreevents'>
+						<a href='events/search/'>See more events &gt;&gt;</a>
+					</div>
+                      	
+                             	
                              </div>
                         </div>
               		</div>

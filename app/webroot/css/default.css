@@ -9,10 +9,12 @@ body{
 /* LINK */
 a{
 	text-decoration:none;
+	color:#0066FF;
+
 }
 
 a:hover{
-	color:#F00;
+	color:#0099FF;
 }
 
 a:visited{
@@ -116,6 +118,8 @@ img a{
 	background-color:#FCF;
 	position:relative;
 	float:left;
+	padding-left:3px;
+	padding-top:4px;
 }
 
 /* Search area */
@@ -163,10 +167,11 @@ img a{
 
 /* Sorting menu */
 .detail_box {
-	background: #CCC;
+	background: #FFF;
 	margin-top: 20px;
 	min-height: 330px;
-	padding: 50px 5px 50px 5px;
+	padding: 10px 5px 10px 5px;
+	font-size:13px;
 }
 
 .detail_box_sort a{
@@ -246,6 +251,10 @@ img a{
 	background:#DDDDFF;
 }
 
+.event_table_row3 td {
+	background:#FFDDDD;
+}
+
 .event_table_actions_cell a {
 	color:#0066FF;
 	line-height:150%;
@@ -288,4 +297,36 @@ img a{
 
 .search {
 	margin: 12px;
+}
+
+.headerhl {
+	color:#E30075;
+}
+
+h1 {
+	padding-left:5px;
+	margin-top:1px;
+	padding-top:0px;
+}
+
+.hint {
+	color:gray;
+}
+
+.tagmsg {
+	padding:5px;
+	padding-left:15px;
+	padding-bottom:0px;
+	font-size:14px;
+}
+
+.moreevents {
+	text-align:center;
+	padding:15px;
+	font-size:18px;
+}
+
+.addinput {
+	position:absolute;
+	left:300px;
 }

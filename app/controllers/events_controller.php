@@ -24,19 +24,34 @@ class EventsController extends AppController {
 	/**
 	 * Search: List events with AJAX-ified filters.
 	 */
-	function search() {
-		//  Paginate the list.
-		$conditions = array('event_datetime >=' => date('Y-m-d G:i a'));
+	function search($tag='') {
+		App::import('Sanitize'); 
+		// Order by date, for now.
+		$conditions = array('event_datetime >=' => date('Y-m-d'));
+		$this->set('tagmsg', "");		
+				
+		// Add search conditions.
+		if ( array_key_exists('search_text', $_POST) && $_POST['search_text'] != '' ) {
+			$search = Sanitize::escape($_POST['search_text']);
+			$terms = split('/[ ,;]/', $search);
 		
-		if ( $_POST['search_text'] != '' ) {
-			$search = $_POST['search_text'];
-			$conditions[] = "MATCH(event_title) AGAINST('$search')";
+			foreach ($terms as $term) {
+				$conditions[] = "(event_title LIKE '%$term%' OR MATCH(event_description) AGAINST('$term') OR MATCH(event_location) AGAINST('$term'))";
+			}
+		
+		}
+		if ( $tag != '') {
+			$this->set('tagmsg', "Filtering by tag: <b>$tag</b>");
+			$conditions[] = "event_tags LIKE '%$tag%'";
 		}
 
-		$this->Pagination->modelClass = "Event";
-        list($order,$limit,$page) = $this->Pagination->init($conditions, array('show' => 15)); // Added
 
-		$list = $this->Event->find('all', array('conditions' => $conditions, 'order' => array($order), 'limit' => $limit, 'page' => $page));
+		
+		// Paginate.
+		$this->Pagination->modelClass = "Event";
+        list($order,$limit,$page) = $this->Pagination->init($conditions, array('show' => 15)); // Hard-coded...
+
+		$list = $this->Event->find('all', array('conditions' => $conditions, 'order' => 'event_datetime ASC', 'limit' => $limit, 'page' => $page));
 
 		$this->set('eventList',$list);
 	}
@@ -45,7 +60,69 @@ class EventsController extends AppController {
 	 * Add: Display form for adding events.
 	 */
 	function add() {
-		// TODO: Implementation for adding events to the database
+		App::import('Sanitize'); 
+		
+		if (array_key_exists('title', $_POST)) {
+			$errors = array();
+			
+			/* Get data. */
+			$submitter = $_POST['name'];
+			$email = $_POST['email'];
+			$title = Sanitize::escape($_POST['title']);
+			$desc = Sanitize::escape($_POST['description']);
+			$url = Sanitize::escape($_POST['url']);
+			$tags = Sanitize::escape($_POST['tags']);
+			$location = Sanitize::escape($_POST['location']);
+			if (empty($title) || empty($location)) {
+				$errors[] = "You must specificy a title and location.";
+			}
+			if (empty($desc)) {
+				$errors[] = "You must specify a description.";
+			}
+			
+			$month = (int)($_POST['month']);
+			$day = (int)($_POST['day']);
+			$year = (int)($_POST['year']);
+			$hour = (int)($_POST['hour']);
+			$min = (int)($_POST['min']);
+			if (!$day || !$year || !$month || !$hour) {
+				$errors[] = "Invalid date.";
+			}
+			
+			// Convert hour to 24-hour format.
+			if ($hour == 12) {
+				$hour = 0;
+			}
+			
+			$time = $_POST['time'];
+			if ($time == "PM") {
+				$hour += 12;
+			}
+			
+			$url = Sanitize::escape($_POST['url']);
+			$description = Sanitize::escape(strip_tags($_POST['description']));
+			
+			if (sizeof($errors) > 0) {
+				$errorlist = 'The following errors occurred: <br/><ul><li>' . implode('<li>',$errors) . '</ul>';
+				$this->set('errormsg', $errorlist);
+			} else {
+				// Insert.
+				$datetime = $year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $min;
+				
+				$this->Event->create();
+				$this->Event->save(array(
+					'event_title' =>  $title,
+					'event_description' => $desc,
+					'event_location' => $location,
+					'event_datetime' => $datetime,
+					'event_link' => $url,
+					'event_time_added_at' => date('Y-m-d g:i'),
+					'event_tags' => $tags
+					));
+					
+				$this->set('errormsg', 'Event added successfully -- thank you!');
+			}
+		}
 	}
 }
 

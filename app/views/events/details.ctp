@@ -8,9 +8,18 @@
                 <img src="pub_img/w_event_detail.png" width="334" height="69" alt="event detail" />
                 	<div class="detail_box">
                   	<!-- DETAIL OF EVENT GOES HERE -->
-                     <h2><?php echo $event['Event']['event_title']; ?></h2>
-                     <a href="<?php echo $event['Event']['event_link']; ?>">Website</a><br/>
-                     Tagged: <?php echo $event['Event']['event_tags']; ?><br/>
+                     <h1><?php echo $event['Event']['event_title']; ?></h1>
+                     For more info: <a href="<?php echo $event['Event']['event_link']; ?>" style='font-size:14px;'>Event Website</a><br/><br/>
+                     Tagged as:
+					 <?php
+						$tags = explode(',', $event['Event']['event_tags']);
+						$tagLinks = array();
+						foreach ($tags as $tag) {
+							$tag = trim($tag);
+							$tagLinks[] = "<a href='../search/{$tag}'>$tag</a>";
+						}
+						echo implode(", ", $tagLinks);
+					?>
                      <br/>
                      Location: <?php echo $event['Event']['event_location']; ?><br/>
                      Date: <?php echo date('F j, Y', strtotime($event['Event']['event_datetime'])); ?><br/>
