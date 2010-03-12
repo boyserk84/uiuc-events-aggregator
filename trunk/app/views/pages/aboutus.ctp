@@ -4,7 +4,7 @@
                     <img src="pub_img/wmonkey_head_about.png" width="406" height="28" alt="Wanna know about us?" />
 			  <div class="generic_box_no_color">
             				<h2>About us</h2>
-                      <p>Wanna know about us? Here is who we are.</p>
+                      <p>Wanna know about us? You're in the right place.</p>
                     <fieldset><legend><b>ACM Webmonkeys at the University of Illinois at Urbana-Champaign </b></legend>
 <!--                      <img src="" width="600px" height="200px" alt="[Picture of Staff] 600x200 overhere"/> -->
                 <table width="100%" border="0" cellspacing="5" cellpadding="0">

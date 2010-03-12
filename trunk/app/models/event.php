@@ -18,11 +18,15 @@ class Event extends AppModel {
 	/**
 	 * Get an HTML string of icons for this event.
 	 */
-	function getIcons($data) {
+	function getIcons($data, $limit=-1) {
 		$str = "";
+		$i = 0;
+
 			
 		// Iterate through tags.
-		foreach (split(', ?', $data['event_tags']) as $tag) {
+		$tags = split(', ?', $data['event_tags']);
+		asort($tags);
+		foreach ($tags as $tag) {
 			$icon = "";
 			switch ($tag) {
 				case 'music':
@@ -37,10 +41,21 @@ class Event extends AppModel {
 				case 'food':
 					$icon = "wmonkey_icon13_pizza";
 					break;
+				case 'speaker':
+					$icon = "wmonkey_icon15_speak";
+					break;
+				case 'illinois':
+					$icon = "wmonkey_icon01_i";
+					break;
+				case 'performance':
+					$icon = "wmonkey_icon16_mic";
+					break;
 			}
 
-			if ($icon != "")
+			if ($icon != "") {
+				if ($limit > 0 && $i++ >= $limit) return $str;			
 				$str .= "<img src='pub_icons/" . $icon . ".gif' alt=\"$tag\" title=\"$tag\"/>";
+			}
 		}
 		
 		return $str;
