@@ -1,6 +1,8 @@
 <?php
+define("CANOPY_CLUB", 2);
 define ('ILLINI_PERFORMANCES',3); 
 define ('ILLINI_SPEAKERS',4); 
+define ('HIGHDIVE',5);
 define ('DB_NAME',"events");
 class FeedCrawler {
 	public $db;
@@ -8,14 +10,26 @@ class FeedCrawler {
 
 	} 
 	
+	function clear_table_of_source($source_id)
+	{
+
+		$query = "DELETE FROM events_raw_events WHERE source_id = ".$source_id;
+		echo($query);
+		mysql_query($query,$this->db) or die(mysql_error());
+	}
+	
+	
 	function connectToDatabase()
 	{
+
 	 $this->db = mysql_connect("localhost","root","");
+	 mysql_select_db(DB_NAME,$this->db);
+	
 	}
 	
 	function submitEventDataToDatabase($name,$date,$time,$desc,$location,$source_id,$link,$tags)
 	{
-		$this->connectToDatabase();
+
 		
 		$name = mysql_real_escape_string($name);
 		$date = mysql_real_escape_string($date);
@@ -53,6 +67,8 @@ class FeedCrawler {
 
 		$desc = mysql_real_escape_string(strip_tags($desc));
 		$location = mysql_real_escape_string($location);
+		
+		$link = mysql_real_escape_string($link);
 
 
 		
@@ -67,29 +83,125 @@ class FeedCrawler {
 	 
 }
 
+class HighDiveCrawler extends FeedCrawler {
+
+
+	
+	
+
+	function run()
+	{
+		parent::connectToDatabase();
+		
+		parent::clear_table_of_source(HIGHDIVE);
+		
+		$urlarray = array("http://thehighdive.com/modules/calendar_ve/index.php?op=month");
+		$totalevents = array();
+		
+		
+		foreach ($urlarray as $url)
+		{
+			$html = $this->page_to_string($url);
+			$events = $this->get_array_of_events($html);
+			//$totalevents += $events; 
+		}
+		$totalevents = $events;
+		
+		foreach ($totalevents as $single)
+		{
+		
+		 $this->submit_event_details($single);
+	
+		
+		}
+	
+			
+	}
+	
+	function page_to_string($url)
+	{
+		$page = file($url);  
+		$buffer = implode($page); 
+    	$buffer = str_replace("\n","&nbsp;",$buffer);
+		return $buffer;
+	}
+	
+	function get_array_of_events($pagehtml)
+	{
+		//echo($pagehtml);
+	
+		$regex = '/'.preg_quote('<img src="http://www.thehighdive.com/themes/highdive/hr_red.gif" width="530" height="10" alt="" />','/')
+		."(.*?)(?=".preg_quote('<img src="http://www.thehighdive.com/themes/highdive/hr_red.gif" width="530" height="10" alt="" />','/').')/';
+	
+
+		preg_match_all($regex,$pagehtml,$result,PREG_PATTERN_ORDER);
+		
+//		print_r($result[1]);
+		
+		return $result[1];
+	}
+	
+	function submit_event_details($event)
+	{
+
+	//	echo($event);
+		//TITLE, LINK
+		//First pattern match is event link, second is title.
+		$regex_titlelink = '/'.preg_quote('<font size="+1"><strong><a href="','/').'(.*?)'.'"\>'."(.*?)"."\<\/a\>\<\/strong\>/";
+		preg_match($regex_titlelink,$event,$matches);
+		$details['event_link'] = $matches[1];
+		$details['event_title'] = $matches[2];
+	
+		
+		//DESCRIPTION
+		$regex_desc = '/Cover\: (.*?)\<table width\="100\%" cellspacing\="0" cellpadding\="0"\>/';
+		preg_match($regex_desc,$event,$matches);
+		$details['event_description'] = $matches[1];
+		
+		//DATETIME
+	
+		$regex_datetime = "/".preg_quote('&nbsp;<strong>','/')."(.*?)".preg_quote("</strong>",'/').'/';
+	
+		
+	
+		preg_match($regex_datetime,$event,$matches);
+		$timestr = str_replace('@','',$matches[1]);
+		$details['event_datetime'] = strtotime($timestr);
+		
+		//LOCATION
+		$details['event_location'] = "The High Dive @ 51 Main St Champaign";
+		
+		//TAGS
+		$details['event_tags'] = "highdive,music,champaign";
+	
+		print_r($details);	
+
+		//Submit event
+		parent::submitEventDataToDatabase($details['event_title'],$details['event_datetime'],$details['event_datetime'],$details['event_description'],
+			$details['event_location'],HIGHDIVE,$details['event_link'],$details['event_link']);
+	}
+
+}
+
+
+
 class IllinoisPerformancesCrawler extends FeedCrawler {
 	public $eventData;
 
-	function clear_table_of_source($source_id)
-	{
-		$source_id = $source_id;
-		$query = "DELETE FROM events_raw_events WHERE source_id = ".$source_id;
-		mysql_query($query,$this->db);
-	}
-	
+
 	function run($cal_id)
 	{
 		$this->connectToDatabase();
 		
 		if ($cal_id == 597) //PERFORMANCES
 		{
-				$this->clear_table_of_source(ILLINI_PERFORMANCES);
+				parent::clear_table_of_source(ILLINI_PERFORMANCES);
 				$source = ILLINI_PERFORMANCES;
 		}
 		elseif ($cal_id == 598) //SPEAKERS
 		{ 
-			echo("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*************@@@@@@@@@@@@@@@@@@@@@@");
-				$this->clear_table_of_source(ILLINI_SPEAKERS);
+			
+				parent::clear_table_of_source(ILLINI_SPEAKERS);
 				$source = ILLINI_SPEAKERS;
 		}
 		
@@ -146,17 +258,10 @@ class CanopyClubCrawler extends FeedCrawler {
 	public $eventData;
 
 
-	function clear_table_of_source($source_id)
-	{
-		$source_id = (int)$source_id;
-		$query = "DELETE FROM events_raw_events WHERE source_id = ".$source_id;
-		mysql_query($query,$this->db);
-	}
-	
-	
 	function run() {
-		
-	//	$this->clear_table_of_source(2);
+
+		parent::connectToDatabase();
+		parent::clear_table_of_source(CANOPY_CLUB);
 		$file = implode(file('http://www.canopyclub.com/canopy.php'));
 		$file = str_replace("\n","",$file);
 		preg_match_all('/\<div class\=\"show\"\>(.*?)\<p class\=\"info\"\>(.*?)\<\/p\>.+?\<\/div\>/',$file,$matches,PREG_PATTERN_ORDER);
