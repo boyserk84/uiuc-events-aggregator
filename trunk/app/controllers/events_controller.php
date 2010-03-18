@@ -31,8 +31,12 @@ class EventsController extends AppController {
 		$this->set('tagmsg', "");		
 				
 		// Add search conditions.
-		if ( array_key_exists('search_text', $_POST) && $_POST['search_text'] != '' ) {
-			$search = Sanitize::escape($_POST['search_text']);
+		if ( $tag != '') {
+			$this->set('tagmsg', "Filtering by tag: <b>$tag</b>");
+			$conditions[] = "event_tags LIKE '%$tag%'";
+		}
+		if ( array_key_exists('search', $_REQUEST) && $_REQUEST['search'] != '' ) {
+			$search = Sanitize::escape($_REQUEST['search']);
 			$terms = split('/[ ,;]/', $search);
 		
 			foreach ($terms as $term) {
@@ -40,10 +44,7 @@ class EventsController extends AppController {
 			}
 		
 		}
-		if ( $tag != '') {
-			$this->set('tagmsg', "Filtering by tag: <b>$tag</b>");
-			$conditions[] = "event_tags LIKE '%$tag%'";
-		}
+		
 
 
 		
