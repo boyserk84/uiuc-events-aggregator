@@ -39,15 +39,14 @@ class FeedCrawler {
 		$location = mysql_real_escape_string($location);
 		$datetime = strtotime($date ." ". $time);
 
-		if ($datetime < time()) 
-		
-		{ $datetime = mktime(
-		date("G",$datetime),
-		date("i",$datetime),
-		date("s",$datetime),
-		date("m",$datetime),
-		date("d",$datetime),
-		date("y",$datetime)+1);
+		if ($datetime < time()-(3*(60*60*24))) {
+			$datetime = mktime(
+			date("G",$datetime),
+			date("i",$datetime),
+			date("s",$datetime),
+			date("m",$datetime),
+			date("d",$datetime),
+			date("y",$datetime)+1);
 		}
 		
 		$sql = "INSERT INTO `".DB_NAME."`.`events_raw_events` (`source_id`, `event_time_added_at`, `event_title`, `event_description`, `event_datetime`, `event_location`, `event_link`, `event_tags`) VALUES (".$source_id.", NOW(), '".$name."', '".$desc."', FROM_UNIXTIME(".$datetime."), '".$location."', '".$link."', '".$tags."');";
@@ -165,7 +164,9 @@ class HighDiveCrawler extends FeedCrawler {
 		
 	
 		preg_match($regex_datetime,$event,$matches);
-		$timestr = str_replace('@','',$matches[1]);
+	
+		$timestr = str_replace('@ ','',$matches[1]);
+		echo($timestr);
 		$details['event_datetime'] = strtotime($timestr);
 		
 		//LOCATION
@@ -177,8 +178,8 @@ class HighDiveCrawler extends FeedCrawler {
 		print_r($details);	
 
 		//Submit event
-		parent::submitEventDataToDatabase($details['event_title'],$details['event_datetime'],$details['event_datetime'],$details['event_description'],
-			$details['event_location'],HIGHDIVE,$details['event_link'],$details['event_link']);
+		parent::submitEventDataToDatabaseTimeStamp($details['event_title'],"",$details['event_datetime'],$details['event_description'],
+			$details['event_location'],HIGHDIVE,$details['event_link'],$details['event_tags']);
 	}
 
 }
