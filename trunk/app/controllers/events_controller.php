@@ -10,15 +10,27 @@ class EventsController extends AppController {
 	// Define a name.
 	var $name = 'Events';
 	// Components and helpers needed.
-    var $components = array ('Pagination'); 
-    var $helpers = array('Pagination'); 
+    var $components = array ('Pagination', 'RequestHandler'); 
+    var $helpers = array('Pagination', 'Xml'); 
 
+	
+	
 	/**
 	 * Details: A function to display the details of an event.
 	 */
 	function details($event_id) {
 		//$this->Event->event_id = $event_id;
 		$this->set('event', $this->Event->findById($event_id));
+	}
+	
+	
+	/**
+	 * XML version of feed.
+	 */
+	function xml($tag='') {	
+		$this->layout = 'xml\default';
+		$this->RequestHandler->respondAs('xml');
+		$this->set('data', $this->Event->find('all'));
 	}
 	
 	/**

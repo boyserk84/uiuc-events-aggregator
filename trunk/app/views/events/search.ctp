@@ -6,9 +6,9 @@ if ($tagmsg != '') {
 }
 ?>
 <div class="search">
-  <form id="search" name="search" method="post" action="">
-	<span class="hint">Enter a few keywords to refine your search:</span> <input name="search_text" type="text" size="30" maxlength="150" />
-		<input name="search" type="submit" value="Search!" />
+  <form id="search" name="search" method="get" action="">
+	<span class="hint">Enter a few keywords to refine your search:</span> <input name="search" type="text" size="30" maxlength="150" />
+		<input name="searchs" type="submit" value="Search!" />
   </form>
 </div>
 
@@ -41,7 +41,7 @@ foreach ($eventList as $event) {
 			$tagLinks = array();
 			foreach ($tags as $tag) {
 				$tag = trim($tag);
-				$tagLinks[] = "<a href='{$tag}'>$tag</a>";
+				$tagLinks[] = $html->link($tag, 'search/' . $tag);
 			}
 			echo implode(", ", $tagLinks);
 		?>

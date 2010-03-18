@@ -58,9 +58,9 @@
                     	<div class="search_section">
                         	<img src="pub_img/w_search.png" width="393" height="54" align="left" />
                         	<div class="search_box">
-                        	  <form id="search" name="search" method="post" action="events/search">
-                              		<input name="search_text" type="text" size="30" maxlength="150" />
-                                    <input name="search" type="submit" value="Search Event" />
+                        	  <form id="search" name="search" method="get" action="events/search">
+                              		<input name="search" type="text" size="30" maxlength="150" />
+                                    <input name="searchs" type="submit" value="Search Event" />
                       	      </form>
                    	        </div>
              		 </div></div>

@@ -348,7 +348,7 @@ class PaginationComponent extends Object
 		{
 			if (substr($this->url, -1, 1)<>"/")
 			{
-				$this->url .= "/";
+				//$this->url .= "/";
 			}
 		}
 		else // No url in the parameters, derive it.
