@@ -6,7 +6,7 @@ define ('HIGHDIVE',5);
 define ('DB_NAME',"events");
 class FeedCrawler {
 	public $db;
-	function run($urlTarget) {
+	function run($urlTarget) { 
 
 	} 
 	
@@ -39,7 +39,7 @@ class FeedCrawler {
 		$location = mysql_real_escape_string($location);
 		$datetime = strtotime($date ." ". $time);
 
-		if ($datetime < time()) 
+		if ($datetime < time() - (60*60*24*2)) 
 		
 		{ $datetime = mktime(
 		date("G",$datetime),
@@ -259,10 +259,10 @@ class CanopyClubCrawler extends FeedCrawler {
 		parent::connectToDatabase();
 		parent::clear_table_of_source(CANOPY_CLUB);
 		$file = implode(file('http://www.canopyclub.com/canopy.php'));
-		$file = str_replace("\n","",$file);
+		$file = str_replace("\n","<br>",$file);
 		preg_match_all('/\<div class\=\"show\"\>(.*?)\<p class\=\"info\"\>(.*?)\<\/p\>.+?\<\/div\>/',$file,$matches,PREG_PATTERN_ORDER);
 		
-
+		putenv("TZ=America/Chicago");
 		foreach ($matches[0] as $key=>$match)
 		{
 	
@@ -283,7 +283,7 @@ class CanopyClubCrawler extends FeedCrawler {
 	
 			//Get the time
 			$d_time = "";
-			preg_match("/\<p class=\"info\"\>.*?(\d{1,2}\:\d\d\s?[ap]m).*?\<\/p\>/i",$match,$time);
+			preg_match("/\<p class=\"info\"\>.*?(\d{1,2}\:\d\d\s?[ap]\.?m\.?).*?\<\/p\>/i",$match,$time);
 			if (sizeof($time) > 1)
 				$d_time = $time[1];
 			else $d_time = "9:00 PM";
