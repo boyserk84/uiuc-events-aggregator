@@ -26,7 +26,7 @@ foreach ($eventList as $event) {
 	<td class="event_table_icon_cell" width="64">
 		<?php echo Event::getIcons($event['Event']); ?>
 	</td>
-	<td class="event_table_title_cell" onclick="window.location='../details/<?php echo $event['Event']['id']; ?>';">		
+	<td class="event_table_title_cell" onclick="window.location='<?php echo $html->url('details/' . $event['Event']['id']); ?>';">		
 		<?php echo $event['Event']['event_title']; ?>	
 	</td>
 	<td class="event_table_location_cell">
