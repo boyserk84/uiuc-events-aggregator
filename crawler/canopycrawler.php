@@ -39,14 +39,15 @@ class FeedCrawler {
 		$location = mysql_real_escape_string($location);
 		$datetime = strtotime($date ." ". $time);
 
-		if ($datetime < time()-(3*(60*60*24))) {
-			$datetime = mktime(
-			date("G",$datetime),
-			date("i",$datetime),
-			date("s",$datetime),
-			date("m",$datetime),
-			date("d",$datetime),
-			date("y",$datetime)+1);
+		if ($datetime < time()) 
+		
+		{ $datetime = mktime(
+		date("G",$datetime),
+		date("i",$datetime),
+		date("s",$datetime),
+		date("m",$datetime),
+		date("d",$datetime),
+		date("y",$datetime)+1);
 		}
 		
 		$sql = "INSERT INTO `".DB_NAME."`.`events_raw_events` (`source_id`, `event_time_added_at`, `event_title`, `event_description`, `event_datetime`, `event_location`, `event_link`, `event_tags`) VALUES (".$source_id.", NOW(), '".$name."', '".$desc."', FROM_UNIXTIME(".$datetime."), '".$location."', '".$link."', '".$tags."');";
@@ -83,10 +84,6 @@ class FeedCrawler {
 }
 
 class HighDiveCrawler extends FeedCrawler {
-
-
-	
-	
 
 	function run()
 	{
@@ -164,9 +161,7 @@ class HighDiveCrawler extends FeedCrawler {
 		
 	
 		preg_match($regex_datetime,$event,$matches);
-	
-		$timestr = str_replace('@ ','',$matches[1]);
-		echo($timestr);
+		$timestr = str_replace('@','',$matches[1]);
 		$details['event_datetime'] = strtotime($timestr);
 		
 		//LOCATION
@@ -178,7 +173,7 @@ class HighDiveCrawler extends FeedCrawler {
 		print_r($details);	
 
 		//Submit event
-		parent::submitEventDataToDatabaseTimeStamp($details['event_title'],"",$details['event_datetime'],$details['event_description'],
+		parent::submitEventDataToDatabase($details['event_title'],$details['event_datetime'],$details['event_datetime'],$details['event_description'],
 			$details['event_location'],HIGHDIVE,$details['event_link'],$details['event_tags']);
 	}
 
@@ -242,7 +237,7 @@ class IllinoisPerformancesCrawler extends FeedCrawler {
 				//$eventData[$key] = $event;
 
 				
-				parent::submitEventDataToDatabaseTimeStamp($item->title,"",$event['time'],$matches_cost[1]." ".$item->description,$matches_place[1],$source,$item->link,					($source==3?"illinois,performance":"speaker,illinois"));
+				parent::submitEventDataToDatabaseTimeStamp($item->title,"",$event['time'],$matches_cost[1]." ".$item->description,$matches_place[1],$source,$item->link,($source==3?"illinois,performance":"speaker,illinois"));
 							
 			}
 		
@@ -291,7 +286,7 @@ class CanopyClubCrawler extends FeedCrawler {
 			preg_match("/\<p class=\"info\"\>.*?(\d{1,2}\:\d\d\s?[ap]m).*?\<\/p\>/i",$match,$time);
 			if (sizeof($time) > 1)
 				$d_time = $time[1];
-	
+			else $d_time = "9:00 PM";
 			
 			//Opening bands
 			preg_match("/\<p class=\"secband\"\>(.*?)\<\/p>/",$match,$openingbands);
@@ -341,7 +336,8 @@ class CanopyClubCrawler extends FeedCrawler {
 	
 	function submitEventDataToDB($event)
 	{
-		parent::submitEventDataToDatabase($event['name'],$event['date'],$event['time'],$event['price'].": ".$event['desc'],$event['location'],2,"http://www.canopyclub.com","canopy, club, music");
+		if ($event['desc'] != "") { $concat_tag = ": "; } else { $concat_tag = ""; }
+		parent::submitEventDataToDatabase($event['name'],$event['date'],$event['time'],$event['price'].$concat_tag.$event['desc'],$event['location'],2,"http://www.canopyclub.com","canopy, club, music");
 	}
 
 }
