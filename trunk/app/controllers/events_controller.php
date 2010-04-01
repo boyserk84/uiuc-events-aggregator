@@ -28,9 +28,30 @@ class EventsController extends AppController {
 	 * XML version of feed.
 	 */
 	function xml($tag='') {	
-		$this->layout = 'xml\default';
+		App::import('Sanitize'); 
+		
+		$this->layout = 'xml/default';
 		$this->RequestHandler->respondAs('xml');
-		$this->set('data', $this->Event->find('all'));
+	
+		// Order by date, for now.
+		$conditions = array("event_datetime >= '" . date('Y-m-d') . " 00:00:00'");
+		// Add search conditions.
+		if ( $tag != '') {
+			$conditions[] = "event_tags LIKE '%$tag%'";
+		}
+		if ( array_key_exists('search', $_REQUEST) && $_REQUEST['search'] != '' ) {
+			$search = Sanitize::escape($_REQUEST['search']);
+			$terms = split('/[ ,;]/', $search);
+		
+			foreach ($terms as $term) {
+				$conditions[] = "(event_title LIKE '%$term%' OR MATCH(event_description) AGAINST('$term') OR MATCH(event_location) AGAINST('$term'))";
+			}
+		
+		}
+
+
+		$this->set('data', $this->Event->find('all', array('conditions' => $conditions, 'order' => 'event_datetime ASC')));
+
 	}
 	
 	/**
