@@ -21,7 +21,7 @@ $processor->run(2);
 
 $processor->run(3);
 $processor->run(4);
-//$processor->run(6);
+$processor->run(6);
 
 //High Dive
 $processor->run(5);
