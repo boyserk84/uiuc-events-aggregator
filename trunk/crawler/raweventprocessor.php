@@ -8,6 +8,11 @@ class RawEventProcessor
 
 	public $db;
 	
+	function truncateEvents()
+	{
+		$query = "TRUNCATE events_events";
+		mysql_query($query,$this->db);
+	}
 	
 	function run($source_id)
 	{
