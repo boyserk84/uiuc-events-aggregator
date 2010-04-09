@@ -52,6 +52,9 @@ class RawEventProcessor
 			case HIGHDIVE:
 				$this->insert_data_directly_from_source($source_id);
 				break;
+			case TEC_EVENTS:
+				$this->insert_data_directly_from_source($source_id);
+				break;
 		
 		}
 	}

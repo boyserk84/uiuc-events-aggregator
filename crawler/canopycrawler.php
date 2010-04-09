@@ -6,7 +6,7 @@ define ('ILLINI_PERFORMANCES',3);
 define ('ILLINI_SPEAKERS',4); 
 define ('TEC_EVENTS',6);
 
-define ('HIGHDIVE',5);
+define ('HIGHDIVE',5); 
 define ('DB_NAME',"events");
 class FeedCrawler {
 	public $db;
