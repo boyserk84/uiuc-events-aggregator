@@ -15,9 +15,15 @@ $crawler->run();
 
 //Data's been fed into raw table, now process it.
 $processor = new RawEventProcessor();
+
+//Canopy Club
 $processor->run(2);
-$processor->run(3);
-$processor->run(4);
+
+$processor->run(3,ILLINI_PERFORMANCES,"performances");
+$processor->run(4,ILLINI_SPEAKERS,"speakers");
+$processor->run(4,ILLINI_SPEAKERS,"TEC,technology,entrepreneurship,center");
+
+//High Dive
 $processor->run(5);
 
 
