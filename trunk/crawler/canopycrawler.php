@@ -199,8 +199,9 @@ class IllinoisPerformancesCrawler extends FeedCrawler {
 		
 		$target_url = "http://illinois.edu/calendar/RSS?calId=".$cal_id;
 		$file = implode(file($target_url));
-		$file = str_replace("\n","",$file);		
-		
+		$file = str_replace("\n","",$file);	
+		$file = preg_replace('/[^(\x20-\x7F)]*/','', $file);	
+
 		$element = simplexml_load_string($file);
 		$child = $element->channel;
 		
@@ -307,7 +308,8 @@ class CanopyClubCrawler extends FeedCrawler {
 				
 				preg_match("/\<p class\=\"showcontent\"\>(.*?)\<\/p\>/",$file2,$desc);
 				//echo($desc[1]."<br>");
-				$d_desc = htmlspecialcharacters($desc[1]);
+				$d_desc = $desc[1];
+				$d_desc = preg_replace('/[^(\x20-\x7F)]*/','', $d_desc);
 				
 			}
 			
