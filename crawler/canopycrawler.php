@@ -1,7 +1,11 @@
 <?php
 define("CANOPY_CLUB", 2);
+
+//UIUC CALENDARS
 define ('ILLINI_PERFORMANCES',3); 
 define ('ILLINI_SPEAKERS',4); 
+define ('TEC_EVENTS',6);
+
 define ('HIGHDIVE',5);
 define ('DB_NAME',"events");
 class FeedCrawler {
@@ -185,22 +189,13 @@ class IllinoisPerformancesCrawler extends FeedCrawler {
 	public $eventData;
 
 
-	function run($cal_id)
+	function run($cal_id,$source,$tags)
 	{
 		$this->connectToDatabase();
 		
-		if ($cal_id == 597) //PERFORMANCES
-		{
-				parent::clear_table_of_source(ILLINI_PERFORMANCES);
-				$source = ILLINI_PERFORMANCES;
-		}
-		elseif ($cal_id == 598) //SPEAKERS
-		{ 
+				parent::clear_table_of_source($source);
 			
-				parent::clear_table_of_source(ILLINI_SPEAKERS);
-				$source = ILLINI_SPEAKERS;
-		}
-		
+
 		
 		$target_url = "http://illinois.edu/calendar/RSS?calId=".$cal_id;
 		$file = implode(file($target_url));
@@ -237,7 +232,7 @@ class IllinoisPerformancesCrawler extends FeedCrawler {
 				//$eventData[$key] = $event;
 
 				
-				parent::submitEventDataToDatabaseTimeStamp($item->title,"",$event['time'],$matches_cost[1]." ".$item->description,$matches_place[1],$source,$item->link,($source==3?"illinois,performance":"speaker,illinois"));
+				parent::submitEventDataToDatabaseTimeStamp($item->title,"",$event['time'],$matches_cost[1]." ".$item->description,$matches_place[1],$source,$item->link,("illinois,".$tags));
 							
 			}
 		
@@ -312,7 +307,7 @@ class CanopyClubCrawler extends FeedCrawler {
 				
 				preg_match("/\<p class\=\"showcontent\"\>(.*?)\<\/p\>/",$file2,$desc);
 				//echo($desc[1]."<br>");
-				$d_desc = $desc[1];
+				$d_desc = htmlspecialcharacters($desc[1]);
 				
 			}
 			
