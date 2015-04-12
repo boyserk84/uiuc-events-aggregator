@@ -1,0 +1,1 @@
+This project is an attempt to build an aggregation website, which will gather data from a variety of other websites (like the Canopy Club, Union, etc) and place it in one place in a unified format that allows searching, geolocating, etc.
